@@ -1,0 +1,29 @@
+<script>
+  // Function to fetch and display weather information based on the entered city
+  async function fetchWeather(city) {
+    try {
+      const response = await fetch(`http://localhost:3000/weather/${city.toLowerCase()}`);
+      const data = await response.json();
+
+      if (data.error) {
+        alert(data.error);
+      } else {
+        alert(`Weather in ${city}: ${data.temperature}°, ${data.description}`);
+      }
+    } catch (error) {
+      alert("Error fetching weather data.");
+    }
+  }
+
+ 
+  function changeCity() {
+    let areaName = prompt("Enter the name of the city:");
+
+    if (areaName) {
+      fetchWeather(areaName);
+    }
+  }
+
+  // Event listener for the Change City button
+  document.getElementById("changeCityBtn").addEventListener("click", changeCity);
+</script>
